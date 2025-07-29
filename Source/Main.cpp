@@ -6,6 +6,7 @@
 //------------------------------------------------------------------------------
 
 #include <iostream>
+#include "Engine/Core/Engine.hpp"
 #include "Engine/Core/Base.hpp"
 #include "Engine/Core/Logger/Logger.hpp"
 #include "Engine/Core/Logger/ConsoleLogger.hpp"
@@ -13,51 +14,14 @@
 
 namespace Nightbloom
 {
-	void EngineInit()
-	{
-		// Initialize logging system
-		Logger& logger = Logger::Get();
-
-		// Add console output with colors
-		logger.AddSink(std::make_shared<ConsoleLogger>(true));
-
-		// Add file output
-		logger.AddSink(std::make_shared<FileLogger>("NightBloom.log"));
-
-		// Set default log level
-		logger.SetLogLevel(LogLevel::Trace);
-
-		//LOG_INFO_S("NightBloom Engine Initialized");
-
-		LOG_INFO("NightBloom Engine Initialized");
-		LOG_INFO("Version {}.{}.{}",
-			NIGHTBLOOM_VERSION_MAJOR,
-			NIGHTBLOOM_VERSION_MINOR,
-			NIGHTBLOOM_VERSION_PATCH);
-	}
-	void EngineShutdown()
-	{
-		LOG_INFO("Shutting down...");
-		Logger::Get().ClearSinks();
-	}
 }
 
 int main(int argc, char** argv)
 {
+	// Initialize the engine
 	Nightbloom::EngineInit();
 
-//	LOG_INFO("Playform: {}",
-//#ifdef NIGHTBLOOM_PLATFORM_WINDOWS
-//		"Windows"
-//#elif defined(NIGHTBLOOM_PLATFORM_LINUX)
-//		"Linux"
-//#elif defined(NIGHTBLOOM_PLATFORM_MACOS)
-//		"macOS"
-//#else
-//		"Unknown Platform"
-//#endif
-//	);
-
+	// Test Logging
 	LOG_INFO("Sandbox Application Running!\n");
 	LOG_DEBUG("Command line args: {}", argc);
 
